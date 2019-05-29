@@ -20,7 +20,7 @@ public class CNF {
         }
     }
 
-    public String getCNFSentence() {
+    public String getCNF() {
         return Cnf;
     }
 

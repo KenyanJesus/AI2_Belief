@@ -10,6 +10,7 @@ public class Main {
     public static void belief() {
         BeliefeBase bb = new BeliefeBase();
 
+        for (; ; ) {
         System.out.println("PRESS 1 TO ADD CNF");
         System.out.println("PRESS 2 TO CHECK FORMULA USING PROPOSITIONAL LOGIC");
         System.out.println("PRESS 3 TO PRINT BELIEFBASE");
@@ -18,8 +19,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         int input = sc.nextInt();
         sc.nextLine();
-        bb.addtoBB("p|q");
-        for (; ; ) {
+   //     bb.addtoBB("p|q");
             switch (input) {
                 case 1:
                     System.out.println("Input sentence in CNF: ");

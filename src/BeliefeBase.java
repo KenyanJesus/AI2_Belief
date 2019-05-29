@@ -18,13 +18,26 @@ public class BeliefeBase {
         }
     }
 
+    public ArrayList<Clause> getClausesBB(ArrayList<Object> bb){
+        ArrayList<Clause> clauses = new ArrayList<Clause>();
+        for(Object obj: beliefBase) {
+            if(obj.getClass().equals(CNF.class)) {
+                cnf = (CNF) obj;
+                clauses.addAll(cnf.getClauses());
+            }
+        }
+        return clauses;
+    }
+
+
+
     public void printBB(){
         int bBLength = beliefBase.size();
         Object obj = (Object) beliefBase;
         for (int i = 0; i<bBLength;i++) {
-            if (obj.getClass() == CNF.class) {
+            if (obj.getClass().equals(CNF.class)) {
                 cnf = (CNF) obj;
-                System.out.println(cnf.getCNFSentence());
+                System.out.println(cnf.getCNF());
             }
         }
     }
@@ -35,6 +48,8 @@ public class BeliefeBase {
         Clause tc1 = new Clause(c1);
         Clause tc2 = new Clause(c2);
         ArrayList<Clause> arr = new ArrayList<>();
+        Set<String> arr2 = new HashSet<String>();
+        StringBuilder newSB = new StringBuilder();
 
             for (Literal tmp1: c1.literals ){
                 for (Literal tmp2: c2.literals){
@@ -46,8 +61,6 @@ public class BeliefeBase {
                     }
 
                 if (resolve){
-                    Set<String> arr2 = new HashSet<String>();
-                    StringBuilder sb = new StringBuilder();
 
                     tc1.clause = tc1.clause.replace(tmp1.symbol, "");
                     tc2.clause = tc2.clause.replace(tmp2.symbol, "");
@@ -74,13 +87,13 @@ public class BeliefeBase {
                     System.out.println(arr2);
 
                     for (String strings : arr2){
-                        sb.append(strings);
+                        newSB.append(strings);
                         if (arr2.size()>1){
-                            sb.append("|");
+                            newSB.append("|");
                         }
                     }
 
-                    Clause temporary = new Clause(sb.toString());
+                    Clause temporary = new Clause(newSB.toString());
                     arr.add(temporary);
                     resolve = false;
                 }
@@ -90,7 +103,8 @@ public class BeliefeBase {
     }
 
     private boolean isCNF(String sentence) {
-        Pattern pattern = Pattern.compile("([!]?[a-zA-Z](\\s?[|]\\s?([!]?[a-zA-Z]))+)|(([!]?[a-zA-Z]\\s?)|([(]([!]?[a-zA-Z](\\s?[|]\\s?[!]?[a-zA-Z])+)[)]\\s?))([&]\\s?(([!]?[a-zA-Z]\\s?)|([(]([!]?[a-zA-Z](\\s?[|]\\s?[!]?[a-zA-Z])+)[)]\\s?)))*");
+        Pattern pattern;
+        pattern = Pattern.compile("([!]?[a-zA-Z](\\s?[|]\\s?([!]?[a-zA-Z]))+)|(([!]?[a-zA-Z]\\s?)|([(]([!]?[a-zA-Z](\\s?[|]\\s?[!]?[a-zA-Z])+)[)]\\s?))([&]\\s?(([!]?[a-zA-Z]\\s?)|([(]([!]?[a-zA-Z](\\s?[|]\\s?[!]?[a-zA-Z])+)[)]\\s?)))*");
         Matcher matcher = pattern.matcher(sentence);
         return matcher.matches();
     }
