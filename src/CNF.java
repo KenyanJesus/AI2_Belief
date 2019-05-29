@@ -1,5 +1,3 @@
-import org.omg.CORBA.Object;
-
 import java.util.ArrayList;
 
 public class CNF {
