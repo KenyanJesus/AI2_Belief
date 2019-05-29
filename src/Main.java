@@ -24,11 +24,7 @@ public class Main {
                 case 1:
                     System.out.println("Input sentence in CNF: ");
                     String input2 = sc.nextLine();
-                    CNF cnf = new CNF(input2);
-                    if (bb.beliefBase.isEmpty()) {
-                        System.out.println("added " + input2 + " to the base");
-                        bb.addtoBB(input2);
-                    }
+                    bb.addtoBB(input2);
                     break;
                 case 2:
                     System.out.println("Seperat literals by |, e.g. q|r");
@@ -38,7 +34,6 @@ public class Main {
                     Clause c2 = new Clause(sc.nextLine());
                     bb.propResolve(c1, c2);
                     break;
-
                 case 3:
                     bb.printBB();
                     break;
