@@ -83,8 +83,6 @@ public class BeliefeBase {
                     Clause temporary = new Clause(sb.toString());
                     arr.add(temporary);
                     resolve = false;
-                    tc1 = new Clause(c1);
-                    tc2 = new Clause(c2);
                 }
             }
     }
